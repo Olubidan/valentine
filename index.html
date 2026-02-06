@@ -17,6 +17,8 @@
             color: #e8d5c4;
             overflow-x: hidden;
             scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         html {
@@ -31,6 +33,14 @@
             padding: 40px 20px;
             position: relative;
             scroll-snap-align: start;
+        }
+
+        /* Landscape mobile */
+        @media (max-height: 600px) and (orientation: landscape) {
+            section {
+                min-height: auto;
+                padding: 20px;
+            }
         }
 
         /* === STARFIELD BACKGROUND === */
@@ -119,6 +129,14 @@
             opacity: 0;
             animation: fadeInSlow 2s ease-out 2.5s forwards;
             position: relative;
+            min-height: 44px;
+            min-width: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .btn:hover {
@@ -131,6 +149,14 @@
 
         .btn:active {
             transform: translateY(-1px);
+        }
+
+        @media (hover: none) {
+            .btn:active {
+                background: rgba(212, 165, 165, 0.1);
+                color: #ffc0cb;
+                border-color: #ffc0cb;
+            }
         }
 
         /* === SECTION 2: PRESENCE === */
@@ -243,6 +269,7 @@
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
             margin-bottom: 20px;
             transition: transform 0.6s ease;
+            aspect-ratio: 4/3;
         }
 
         .memory-photo:hover {
@@ -499,6 +526,7 @@
             opacity: 0;
             animation: fadeInSlow 1.5s ease-out 0.8s forwards;
             text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            padding: 0 15px;
         }
 
         .celebration-message:last-child {
@@ -526,6 +554,21 @@
             line-height: 2.2;
             color: #e8d5c4;
             margin: 30px 0;
+            padding: 0 15px;
+        }
+
+        /* Touch-friendly improvements */
+        @supports (touch-action: manipulation) {
+            button {
+                touch-action: manipulation;
+            }
+        }
+
+        /* Prevent zoom on input focus */
+        @media (max-width: 768px) {
+            input, button, textarea, select {
+                font-size: 16px;
+            }
         }
         /* === CONFETTI === */
         .confetti-piece {
@@ -551,26 +594,307 @@
         }
 
         /* === RESPONSIVE === */
+        @media (max-width: 1024px) {
+            section {
+                padding: 35px 18px;
+                min-height: auto;
+            }
+
+            .presence-content {
+                padding: 20px;
+            }
+
+            .memories-intro {
+                margin-bottom: 40px;
+            }
+
+            .memory-container {
+                gap: 30px;
+            }
+
+            .memory-photo {
+                max-width: 450px;
+                height: 300px;
+            }
+        }
+
         @media (max-width: 768px) {
+            section {
+                padding: 25px 15px;
+                min-height: auto;
+            }
+
             .button-group {
-                gap: 20px;
+                gap: 15px;
+                flex-direction: column;
+                width: 100%;
             }
 
             .btn {
                 padding: 12px 36px;
                 font-size: 14px;
+                width: 100%;
+                max-width: 250px;
+            }
+
+            .greeting {
+                margin-bottom: 15px;
+            }
+
+            .subtext {
+                margin-bottom: 40px;
+                font-size: clamp(13px, 2.5vw, 16px);
+                padding: 0 10px;
+            }
+
+            .opening-content {
+                padding: 20px;
             }
 
             .letter-paper {
-                padding: 30px 25px;
+                padding: 25px 20px;
+                border-left: 2px solid rgba(255, 192, 203, 0.3);
+                max-width: 100%;
             }
 
-            section {
-                padding: 30px 15px;
+            .letter-title {
+                font-size: clamp(18px, 4vw, 24px);
+                margin-bottom: 30px;
+            }
+
+            .thank-line {
+                font-size: clamp(14px, 2.8vw, 16px);
             }
 
             .memory-container {
                 grid-template-columns: 1fr;
+                gap: 25px;
+                padding: 0 10px;
+            }
+
+            .memory-photo {
+                max-width: 100%;
+                height: 280px;
+            }
+
+            .memory-caption {
+                font-size: 14px;
+                padding: 15px;
+            }
+
+            .memories-intro {
+                font-size: clamp(18px, 5vw, 26px);
+                margin-bottom: 30px;
+                padding: 0 10px;
+            }
+
+            .memory-text {
+                font-size: clamp(24px, 5vw, 36px);
+                padding: 0 15px;
+            }
+
+            .memory-line {
+                margin: 20px 0;
+            }
+
+            .vulnerable-line {
+                font-size: clamp(16px, 3.5vw, 22px);
+                margin: 20px 0;
+            }
+
+            .anticipation-line {
+                font-size: clamp(14px, 3.2vw, 20px);
+                margin: 25px 0;
+            }
+
+            .the-question {
+                font-size: clamp(26px, 7vw, 40px);
+                margin-bottom: 50px;
+                padding: 0 15px;
+            }
+
+            .ask-container {
+                gap: 50px;
+            }
+
+            .presence-line {
+                font-size: clamp(16px, 4vw, 20px);
+                margin: 15px 0;
+            }
+
+            .presence-title {
+                font-size: clamp(18px, 5vw, 28px);
+                margin-bottom: 30px;
+            }
+
+            .response-text {
+                font-size: clamp(20px, 5vw, 36px);
+                margin-bottom: 20px;
+                padding: 0 15px;
+            }
+
+            .closing-message {
+                font-size: clamp(16px, 4vw, 22px);
+                margin: 20px 0;
+                padding: 0 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            section {
+                padding: 20px 12px;
+                min-height: auto;
+            }
+
+            .btn {
+                padding: 11px 30px;
+                font-size: 13px;
+                border-radius: 40px;
+            }
+
+            .button-group {
+                gap: 12px;
+            }
+
+            .greeting {
+                font-size: clamp(24px, 6vw, 36px);
+                margin-bottom: 12px;
+            }
+
+            .subtext {
+                font-size: clamp(12px, 2.2vw, 14px);
+                margin-bottom: 30px;
+                line-height: 1.6;
+            }
+
+            .letter-paper {
+                padding: 20px 15px;
+                border-left: 2px solid rgba(255, 192, 203, 0.2);
+            }
+
+            .letter-title {
+                font-size: clamp(16px, 3.5vw, 20px);
+                margin-bottom: 20px;
+            }
+
+            .thank-line {
+                font-size: clamp(13px, 2.5vw, 15px);
+                line-height: 1.7;
+                margin: 12px 0;
+            }
+
+            .memory-container {
+                gap: 18px;
+                padding: 0;
+            }
+
+            .memory-photo {
+                height: 240px;
+                border-radius: 10px;
+            }
+
+            .memory-caption {
+                font-size: 13px;
+                padding: 12px;
+                line-height: 1.5;
+            }
+
+            .memories-intro {
+                font-size: clamp(16px, 4.5vw, 22px);
+                margin-bottom: 25px;
+                padding: 0;
+            }
+
+            .memory-text {
+                font-size: clamp(18px, 4.5vw, 28px);
+                padding: 0;
+            }
+
+            .memory-line {
+                margin: 12px 0;
+            }
+
+            .presence-line {
+                font-size: clamp(14px, 3.5vw, 18px);
+                margin: 12px 0;
+                line-height: 1.8;
+            }
+
+            .presence-title {
+                font-size: clamp(16px, 4vw, 22px);
+                margin-bottom: 20px;
+            }
+
+            .vulnerable-content {
+                padding: 0 10px;
+            }
+
+            .vulnerable-line {
+                font-size: clamp(14px, 3vw, 18px);
+                margin: 15px 0;
+            }
+
+            .anticipation-content {
+                padding: 0 10px;
+            }
+
+            .anticipation-line {
+                font-size: clamp(13px, 2.8vw, 17px);
+                margin: 20px 0;
+                line-height: 1.8;
+            }
+
+            .ask-container {
+                gap: 35px;
+                padding: 0 10px;
+            }
+
+            .the-question {
+                font-size: clamp(22px, 6vw, 32px);
+                margin-bottom: 35px;
+            }
+
+            .response-text {
+                font-size: clamp(16px, 4.5vw, 28px);
+                margin-bottom: 15px;
+                padding: 0 10px;
+            }
+
+            .closing-content {
+                padding: 0 10px;
+            }
+
+            .closing-message {
+                font-size: clamp(14px, 3.5vw, 18px);
+                margin: 15px 0;
+                line-height: 1.7;
+            }
+        }
+
+        @media (max-width: 360px) {
+            section {
+                padding: 18px 10px;
+            }
+
+            .btn {
+                padding: 10px 25px;
+                font-size: 12px;
+            }
+
+            .greeting {
+                font-size: clamp(20px, 5vw, 28px);
+            }
+
+            .subtext {
+                font-size: clamp(11px, 2vw, 13px);
+            }
+
+            .letter-paper {
+                padding: 18px 12px;
+            }
+
+            .memory-photo {
+                height: 200px;
             }
         }
 
@@ -662,9 +986,17 @@
             }
 
             if (noBtn) {
-                noBtn.addEventListener('mouseenter', function() {
-                    dodgeButton(noBtn);
-                });
+                // For touch devices, use touchstart; for desktop, use mouseenter
+                if (window.matchMedia('(hover: hover)').matches) {
+                    noBtn.addEventListener('mouseenter', function() {
+                        dodgeButton(noBtn);
+                    });
+                } else {
+                    noBtn.addEventListener('touchstart', function(e) {
+                        e.preventDefault();
+                        dodgeButton(noBtn);
+                    }, false);
+                }
 
                 noBtn.addEventListener('click', function() {
                     alert('You know what the real answer is! 😊💕');
