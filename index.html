@@ -527,33 +527,6 @@
             color: #e8d5c4;
             margin: 30px 0;
         }
-
-        /* === MUSIC TOGGLE === */
-        .music-toggle {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: rgba(212, 165, 165, 0.2);
-            border: 2px solid rgba(255, 192, 203, 0.4);
-            cursor: pointer;
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            transition: all 0.4s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .music-toggle:hover {
-            background: rgba(212, 165, 165, 0.4);
-            border-color: rgba(255, 192, 203, 0.8);
-            transform: scale(1.1);
-        }
-
         /* === CONFETTI === */
         .confetti-piece {
             position: fixed;
@@ -592,14 +565,6 @@
                 padding: 30px 25px;
             }
 
-            .music-toggle {
-                bottom: 20px;
-                right: 20px;
-                width: 45px;
-                height: 45px;
-                font-size: 20px;
-            }
-
             section {
                 padding: 30px 15px;
             }
@@ -623,7 +588,6 @@
             initializeStars();
             setupSectionTriggers();
             setupButtonInteractions();
-            setupMusicToggle();
         });
 
         // === CREATE STARFIELD ===
@@ -794,25 +758,6 @@
                 setTimeout(() => piece.remove(), 5500);
             }
         }
-
-        // === MUSIC TOGGLE ===
-        function setupMusicToggle() {
-            const toggle = document.querySelector('.music-toggle');
-            if (toggle) {
-                toggle.addEventListener('click', function() {
-                    const audio = document.getElementById('background-music');
-                    if (audio) {
-                        if (audio.paused) {
-                            audio.play().catch(e => console.log('Audio play failed:', e));
-                            toggle.textContent = '🎵';
-                        } else {
-                            audio.pause();
-                            toggle.textContent = '🔇';
-                        }
-                    }
-                });
-            }
-        }
     </script>
 </head>
 <body>
@@ -899,13 +844,5 @@
             <p class="closing-message" style="margin-top: 60px; color: #ffc0cb; font-size: clamp(24px, 5vw, 32px);">Forever, me 💫</p>
         </div>
     </section>
-
-    <!-- MUSIC TOGGLE -->
-    <div class="music-toggle" title="Background music">🔇</div>
-
-    <!-- Background music (silent by default, plays on toggle) -->
-    <audio id="background-music" loop>
-        <source src="data:audio/wav;base64,UklGRiYAAABXQVZFZm10IBAAAAABAAEAQB8AAAB9AAACABAAZGF0YQIAAAAAAA==" type="audio/wav">
-    </audio>
 </body>
 </html>
