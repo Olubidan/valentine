@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Quiet Moment Just For You 💫</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Garamond', serif;
+            background: #0a0e27;
+            color: #e8d5c4;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        html {
+            scroll-snap-type: y mandatory;
+        }
+
+        section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            position: relative;
+            scroll-snap-align: start;
+        }
+
+        /* === STARFIELD BACKGROUND === */
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* === SECTION 1: ARRIVAL === */
+        #arrival {
+            background: radial-gradient(ellipse at 50% 50%, #1a1a3e 0%, #0a0e27 100%);
+            flex-direction: column;
+            text-align: center;
+            position: relative;
+        }
+
+        .arrival-content {
+            position: relative;
+            z-index: 5;
+        }
+
+        .greeting {
+            font-size: clamp(28px, 8vw, 48px);
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            color: #ffc0cb;
+            opacity: 0;
+            animation: fadeInSlow 2s ease-out 0.5s forwards;
+        }
+
+        .subtext {
+            font-size: clamp(14px, 3vw, 18px);
+            font-weight: 300;
+            letter-spacing: 1px;
+            color: #d4a5a5;
+            line-height: 1.8;
+            max-width: 500px;
+            margin: 0 auto 60px;
+            opacity: 0;
+            animation: fadeInSlow 2s ease-out 1.5s forwards;
+        }
+
+        @keyframes fadeInSlow {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .btn {
+            padding: 14px 44px;
+            font-size: 16px;
+            border: 2px solid #d4a5a5;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            background: transparent;
+            color: #d4a5a5;
+            font-family: 'Georgia', serif;
+            font-weight: 400;
+            letter-spacing: 1px;
+            opacity: 0;
+            animation: fadeInSlow 2s ease-out 2.5s forwards;
+            position: relative;
+        }
+
+        .btn:hover {
+            background: rgba(212, 165, 165, 0.1);
+            color: #ffc0cb;
+            border-color: #ffc0cb;
+            box-shadow: 0 0 20px rgba(255, 192, 203, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* === SECTION 2: PRESENCE === */
+        #presence {
+            background: linear-gradient(135deg, #1a1a3e 0%, #2a1a3e 50%, #0a1a2e 100%);
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .presence-content {
+            max-width: 700px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .presence-title {
+            font-size: clamp(24px, 6vw, 36px);
+            font-weight: 300;
+            color: #ffc0cb;
+            margin-bottom: 50px;
+            opacity: 0;
+            animation: fadeInSlow 1.5s ease-out 0.5s forwards;
+        }
+
+        .presence-line {
+            font-size: clamp(18px, 4vw, 24px);
+            font-weight: 300;
+            line-height: 2.2;
+            color: #e8d5c4;
+            margin: 25px 0;
+            opacity: 0;
+        }
+
+        @keyframes heartPulse {
+            0%, 100% { text-shadow: 0 0 10px rgba(255, 192, 203, 0.3); }
+            50% { text-shadow: 0 0 30px rgba(255, 192, 203, 0.7); }
+        }
+
+        .presence-line:nth-child(1) {
+            animation: fadeInSlow 1.5s ease-out 1s forwards;
+        }
+
+        .presence-line:nth-child(2) {
+            animation: fadeInSlow 1.5s ease-out 2s forwards;
+        }
+
+        .presence-line:nth-child(3) {
+            animation: fadeInSlow 1.5s ease-out 3s forwards;
+            animation-name: fadeInSlow, heartPulse;
+        }
+
+        /* === SECTION 3: MEMORY LANE === */
+        #memories {
+            background: linear-gradient(135deg, #0a1a2e 0%, #16213e 50%, #1a1a3e 100%);
+            flex-direction: column;
+        }
+
+        .memories-intro {
+            font-size: clamp(22px, 5vw, 32px);
+            font-weight: 300;
+            color: #ffc0cb;
+            margin-bottom: 60px;
+            opacity: 0;
+            animation: fadeInSlow 1.5s ease-out 0.5s forwards;
+        }
+
+        .memory-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            max-width: 900px;
+            width: 100%;
+            align-items: center;
+        }
+
+        .memory-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            animation: memoryReveal 1s ease-out forwards;
+        }
+
+        .memory-item:nth-child(1) {
+            animation-delay: 0.5s;
+        }
+
+        .memory-item:nth-child(2) {
+            animation-delay: 1.2s;
+        }
+
+        @keyframes memoryReveal {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .memory-photo {
+            width: 100%;
+            max-width: 500px;
+            height: 350px;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 192, 203, 0.2);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+            transition: transform 0.6s ease;
+        }
+
+        .memory-photo:hover {
+            transform: scale(1.02);
+        }
+
+        .memory-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .memory-caption {
+            font-size: clamp(14px, 3vw, 18px);
+            color: #d4a5a5;
+            font-style: italic;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .memory-nav {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #a07070;
+            opacity: 0.7;
+        }
+
+        /* === SECTION 4: GRATITUDE === */
+        #gratitude {
+            background: linear-gradient(135deg, #1a1a3e 0%, #2a0a3e 50%, #0a1a3e 100%);
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .letter-paper {
+            background: rgba(232, 213, 196, 0.05);
+            border-left: 3px solid rgba(255, 192, 203, 0.3);
+            padding: 50px 40px;
+            max-width: 600px;
+            backdrop-filter: blur(10px);
+            border-radius: 2px;
+        }
+
+        .letter-title {
+            font-size: clamp(20px, 5vw, 28px);
+            font-weight: 400;
+            color: #ffc0cb;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeInSlow 1.5s ease-out 0.5s forwards;
+        }
+
+        .thank-line {
+            font-size: clamp(16px, 3vw, 19px);
+            font-weight: 300;
+            line-height: 2;
+            color: #e8d5c4;
+            margin: 20px 0;
+            opacity: 0;
+            animation: typeEffect 1.5s ease-out forwards;
+        }
+
+        .thank-line:nth-child(2) {
+            animation-delay: 0.8s;
+        }
+
+        .thank-line:nth-child(3) {
+            animation-delay: 1.6s;
+        }
+
+        .thank-line:nth-child(4) {
+            animation-delay: 2.4s;
+        }
+
+        @keyframes typeEffect {
+            from {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* === SECTION 5: VULNERABILITY === */
+        #vulnerability {
+            background: linear-gradient(135deg, #0a0e27 0%, #1a0a2e 50%, #0f1a3e 100%);
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .vulnerable-content {
+            max-width: 700px;
+            position: relative;
+        }
+
+        .vulnerable-line {
+            font-size: clamp(20px, 4vw, 28px);
+            font-weight: 300;
+            line-height: 2.2;
+            color: #e8d5c4;
+            margin: 30px 0;
+            opacity: 0;
+        }
+
+        .vulnerable-line:nth-child(1) {
+            animation: fadeInSlow 1.5s ease-out 0.5s forwards;
+            color: #ffc0cb;
+        }
+
+        .vulnerable-line:nth-child(2) {
+            animation: fadeInSlow 1.5s ease-out 1.8s forwards;
+        }
+
+        .vulnerable-line:nth-child(3) {
+            animation: fadeInSlow 1.5s ease-out 3.2s forwards;
+        }
+
+        /* === SECTION 6: ANTICIPATION === */
+        #anticipation {
+            background: linear-gradient(135deg, #1a1a3e 0%, #0a1a2e 50%, #1a0a3e 100%);
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .anticipation-content {
+            max-width: 650px;
+            position: relative;
+        }
+
+        .anticipation-line {
+            font-size: clamp(18px, 4vw, 26px);
+            font-weight: 300;
+            line-height: 2.4;
+            color: #d4a5a5;
+            margin: 40px 0;
+            opacity: 0;
+        }
+
+        .anticipation-line:nth-child(1) {
+            animation: fadeInSlow 1.5s ease-out 0.5s forwards;
+            color: #ffc0cb;
+        }
+
+        .anticipation-line:nth-child(2) {
+            animation: fadeInSlow 1.5s ease-out 2.5s forwards;
+        }
+
+        .anticipation-line:nth-child(3) {
+            animation: fadeInSlow 1.5s ease-out 4.5s forwards;
+        }
+
+        /* === SECTION 7: THE ASK === */
+        #theask {
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1a3e 50%, #2a0a3e 100%);
+            flex-direction: column;
+            text-align: center;
+            z-index: 10;
+            min-height: 120vh;
+            padding-bottom: 100px;
+        }
+
+        .ask-container {
+            position: relative;
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 80px;
+            opacity: 0;
+            animation: fadeInSlow 1.5s ease-out 0.5s forwards;
+        }
+
+        .the-question {
+            font-size: clamp(32px, 10vw, 56px);
+            font-weight: 300;
+            letter-spacing: 1px;
+            color: #ff69b4;
+            text-shadow: 0 0 30px rgba(255, 105, 180, 0.3);
+            opacity: 0;
+            animation: fadeInSlow 1.5s ease-out 0.5s forwards, questionPulse 2.5s ease-in-out 2s infinite;
+        }
+
+        @keyframes questionPulse {
+            0%, 100% {
+                text-shadow: 0 0 30px rgba(255, 105, 180, 0.3);
+            }
+            50% {
+                text-shadow: 0 0 50px rgba(255, 105, 180, 0.6);
+            }
+        }
+
+        .button-group {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            flex-wrap: wrap;
+            align-items: center;
+            position: relative;
+            z-index: 15;
+        }
+
+        .btn-yes {
+            background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+            border: none !important;
+            color: white;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.4);
+            position: relative;
+            z-index: 16;
+        }
+
+        .btn-yes:hover {
+            background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%);
+            box-shadow: 0 15px 40px rgba(255, 105, 180, 0.6);
+            transform: scale(1.08);
+        }
+
+        .btn-no {
+            position: relative;
+            z-index: 15;
+        }
+
+        /* === SECTION 8: CELEBRATION === */
+        #celebration {
+            background: linear-gradient(135deg, #1a0e2e 0%, #ff69b4 50%, #2d1b4e 100%);
+            background-size: 400% 400%;
+            flex-direction: column;
+            text-align: center;
+            animation: celebrationGradient 8s ease infinite;
+            display: none;
+            z-index: 20;
+        }
+
+        @keyframes celebrationGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .celebration-content {
+            position: relative;
+            z-index: 5;
+        }
+
+        .celebration-message {
+            font-size: clamp(28px, 6vw, 44px);
+            font-weight: 300;
+            color: white;
+            margin-bottom: 30px;
+            line-height: 1.8;
+            opacity: 0;
+            animation: fadeInSlow 1.5s ease-out 0.8s forwards;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .celebration-message:last-child {
+            font-size: clamp(20px, 4vw, 28px);
+            margin-top: 30px;
+        }
+
+        /* === SECTION 9: CLOSING === */
+        #closing {
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1a3e 50%, #0f1a3e 100%);
+            flex-direction: column;
+            text-align: center;
+            display: none;
+        }
+
+        .closing-content {
+            max-width: 700px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .closing-message {
+            font-size: clamp(20px, 4vw, 28px);
+            font-weight: 300;
+            line-height: 2.2;
+            color: #e8d5c4;
+            margin: 30px 0;
+        }
+
+        /* === MUSIC TOGGLE === */
+        .music-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(212, 165, 165, 0.2);
+            border: 2px solid rgba(255, 192, 203, 0.4);
+            cursor: pointer;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .music-toggle:hover {
+            background: rgba(212, 165, 165, 0.4);
+            border-color: rgba(255, 192, 203, 0.8);
+            transform: scale(1.1);
+        }
+
+        /* === CONFETTI === */
+        .confetti-piece {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart-confetti {
+            font-size: 40px;
+            animation: confettiFall 3.5s ease-out forwards;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                opacity: 1;
+                transform: translateY(-100vh) rotate(0deg) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(720deg) scale(0);
+            }
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 768px) {
+            .button-group {
+                gap: 20px;
+            }
+
+            .btn {
+                padding: 12px 36px;
+                font-size: 14px;
+            }
+
+            .letter-paper {
+                padding: 30px 25px;
+            }
+
+            .music-toggle {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+
+            section {
+                padding: 30px 15px;
+            }
+
+            .memory-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Reset to top on page load
+            window.scrollTo(0, 0);
+            document.documentElement.scrollTop = 0;
+
+            initializeStars();
+            setupSectionTriggers();
+            setupButtonInteractions();
+            setupMusicToggle();
+        });
+
+        // === CREATE STARFIELD ===
+        function initializeStars() {
+            const starsContainer = document.querySelector('.stars');
+            if (!starsContainer) return;
+
+            const starCount = 100;
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                star.style.animationDelay = (Math.random() * 3) + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // === MEMORY CAROUSEL ===
+        let currentMemory = 0;
+        const memories = [
+            { img: 'pic.jpeg', caption: 'This day… I didn\'t know it would become my favorite memory.' },
+            { img: 'pic2.jpeg', caption: 'Your beauty takes my breath away every single time.' }
+        ];
+
+        function displayMemory(index) {
+            const container = document.querySelector('.memory-container');
+            if (!container) return;
+
+            container.innerHTML = '';
+            
+            memories.forEach((memory, idx) => {
+                const item = document.createElement('div');
+                item.className = 'memory-item';
+                item.style.opacity = '0';
+                item.style.animation = 'memoryReveal 1s ease-out forwards';
+                item.style.animationDelay = (0.5 + idx * 0.7) + 's';
+
+                item.innerHTML = `
+                    <div class="memory-photo">
+                        <img src="${memory.img}" alt="Memory">
+                    </div>
+                    <div class="memory-caption">${memory.caption}</div>
+                `;
+
+                container.appendChild(item);
+            });
+        }
+
+        // === SECTION TRIGGERS ===
+        function setupSectionTriggers() {
+            displayMemory(0);
+        }
+
+        // === BUTTON INTERACTIONS ===
+        function setupButtonInteractions() {
+            const startBtn = document.getElementById('start-btn');
+            const yesBtn = document.getElementById('yes-btn');
+            const noBtn = document.getElementById('no-btn');
+
+            if (startBtn) {
+                startBtn.addEventListener('click', function() {
+                    document.getElementById('presence').scrollIntoView({ behavior: 'smooth' });
+                });
+            }
+
+            if (yesBtn) {
+                yesBtn.addEventListener('click', function() {
+                    handleYesClick();
+                });
+            }
+
+            if (noBtn) {
+                noBtn.addEventListener('mouseenter', function() {
+                    dodgeButton(noBtn);
+                });
+
+                noBtn.addEventListener('click', function() {
+                    alert('You know what the real answer is! 😊💕');
+                });
+            }
+        }
+
+        // === BUTTON DODGE ===
+        function dodgeButton(btn) {
+            // Keep NO button always visible with safe padding
+            const padding = 20;
+            const maxX = Math.max(0, window.innerWidth - btn.offsetWidth - padding);
+            const maxY = Math.max(0, window.innerHeight - btn.offsetHeight - padding);
+
+            let randomX = Math.random() * maxX;
+            let randomY = Math.random() * maxY;
+
+            // Ensure it stays within visible bounds
+            randomX = Math.max(padding, Math.min(randomX, maxX));
+            randomY = Math.max(padding, Math.min(randomY, maxY));
+
+            // Avoid the center area where YES button is (30% to 70% horizontally, 35% to 65% vertically)
+            const centerMinX = window.innerWidth * 0.3;
+            const centerMaxX = window.innerWidth * 0.7;
+            const centerMinY = window.innerHeight * 0.35;
+            const centerMaxY = window.innerHeight * 0.65;
+
+            // If too close to center, move to a corner
+            if (randomX > centerMinX && randomX < centerMaxX && randomY > centerMinY && randomY < centerMaxY) {
+                const corners = [
+                    { x: padding, y: padding },
+                    { x: maxX, y: padding },
+                    { x: padding, y: maxY },
+                    { x: maxX, y: maxY }
+                ];
+                const corner = corners[Math.floor(Math.random() * corners.length)];
+                randomX = corner.x;
+                randomY = corner.y;
+            }
+
+            btn.style.position = 'fixed';
+            btn.style.left = randomX + 'px';
+            btn.style.top = randomY + 'px';
+            btn.style.transition = 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            btn.style.zIndex = '14';
+        }
+
+        // === YES RESPONSE ===
+        function handleYesClick() {
+            const question = document.getElementById('theask');
+            const celebration = document.getElementById('celebration');
+            const closing = document.getElementById('closing');
+
+            if (question) question.style.display = 'none';
+            if (celebration) celebration.style.display = 'flex';
+
+            createConfetti();
+
+            setTimeout(() => {
+                if (celebration) celebration.scrollIntoView({ behavior: 'smooth' });
+            }, 300);
+
+            setTimeout(() => {
+                if (closing) {
+                    closing.style.display = 'flex';
+                    closing.scrollIntoView({ behavior: 'smooth' });
+                }
+            }, 5000);
+        }
+
+        // === CONFETTI ANIMATION ===
+        function createConfetti() {
+            const confettiCount = 80;
+            const hearts = ['💕', '💖', '💗', '❤️', '✨', '💫'];
+
+            for (let i = 0; i < confettiCount; i++) {
+                const piece = document.createElement('div');
+                piece.className = 'confetti-piece';
+                piece.style.left = Math.random() * window.innerWidth + 'px';
+                piece.style.top = '-50px';
+
+                const heart = document.createElement('span');
+                heart.className = 'heart-confetti';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.animationDuration = (Math.random() * 2 + 2.5) + 's';
+                heart.style.animationDelay = (Math.random() * 0.8) + 's';
+
+                piece.appendChild(heart);
+                document.body.appendChild(piece);
+
+                setTimeout(() => piece.remove(), 5500);
+            }
+        }
+
+        // === MUSIC TOGGLE ===
+        function setupMusicToggle() {
+            const toggle = document.querySelector('.music-toggle');
+            if (toggle) {
+                toggle.addEventListener('click', function() {
+                    const audio = document.getElementById('background-music');
+                    if (audio) {
+                        if (audio.paused) {
+                            audio.play().catch(e => console.log('Audio play failed:', e));
+                            toggle.textContent = '🎵';
+                        } else {
+                            audio.pause();
+                            toggle.textContent = '🔇';
+                        }
+                    }
+                });
+            }
+        }
+    </script>
+</head>
+<body>
+    <!-- Hidden starfield for all sections -->
+    <div class="stars"></div>
+
+    <!-- SECTION 1: ARRIVAL -->
+    <section id="arrival">
+        <div class="arrival-content">
+            <h1 class="greeting">Hey love…</h1>
+            <p class="subtext">I made a small corner of the internet just for you.</p>
+            <button id="start-btn" class="btn">Come closer 💫</button>
+        </div>
+    </section>
+
+    <!-- SECTION 2: PRESENCE -->
+    <section id="presence">
+        <div class="presence-content">
+            <h2 class="presence-title">When You're Around</h2>
+            <p class="presence-line">The world feels quieter.</p>
+            <p class="presence-line">I smile without realizing.</p>
+            <p class="presence-line">I breathe a little easier. ✨</p>
+        </div>
+    </section>
+
+    <!-- SECTION 3: MEMORY LANE -->
+    <section id="memories">
+        <h2 class="memories-intro">Moments I Hold Close</h2>
+        <div class="memory-container"></div>
+    </section>
+
+    <!-- SECTION 4: GRATITUDE -->
+    <section id="gratitude">
+        <div class="letter-paper">
+            <h2 class="letter-title">Things I've Never Said Out Loud</h2>
+            <p class="thank-line">Thank you for your patience.</p>
+            <p class="thank-line">Thank you for your laughter.</p>
+            <p class="thank-line">Thank you for choosing me, even on the most ordinary days.</p>
+        </div>
+    </section>
+
+    <!-- SECTION 5: VULNERABILITY -->
+    <section id="vulnerability">
+        <div class="vulnerable-content">
+            <p class="vulnerable-line">You feel like home.</p>
+            <p class="vulnerable-line">Like something steady in a loud world.</p>
+            <p class="vulnerable-line">Like someone I want to keep choosing. 💕</p>
+        </div>
+    </section>
+
+    <!-- SECTION 6: ANTICIPATION -->
+    <section id="anticipation">
+        <div class="anticipation-content">
+            <p class="anticipation-line">There's something I've been wanting to ask you…</p>
+            <p class="anticipation-line" style="margin-top: 80px;">But I wanted to do it right.</p>
+            <p class="anticipation-line" style="margin-top: 80px; color: #ffc0cb;">Here it goes. ✨</p>
+        </div>
+    </section>
+
+    <!-- SECTION 7: THE ASK -->
+    <section id="theask">
+        <div class="ask-container">
+            <h2 class="the-question">Will you be my Valentine? 💌</h2>
+            <div class="button-group">
+                <button id="yes-btn" class="btn btn-yes">YES 💗</button>
+                <button id="no-btn" class="btn btn-no">NO 🙄</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 8: CELEBRATION -->
+    <section id="celebration">
+        <div class="celebration-content">
+            <p class="celebration-message">Thank you for making my heart feel safe. 💖</p>
+            <p class="celebration-message">I love you so much. ✨</p>
+        </div>
+    </section>
+
+    <!-- SECTION 9: CLOSING -->
+    <section id="closing">
+        <div class="closing-content">
+            <p class="closing-message">This is just the beginning.</p>
+            <p class="closing-message">I can't wait to make more moments with you.</p>
+            <p class="closing-message" style="margin-top: 60px; color: #ffc0cb; font-size: clamp(24px, 5vw, 32px);">Forever, me 💫</p>
+        </div>
+    </section>
+
+    <!-- MUSIC TOGGLE -->
+    <div class="music-toggle" title="Background music">🔇</div>
+
+    <!-- Background music (silent by default, plays on toggle) -->
+    <audio id="background-music" loop>
+        <source src="data:audio/wav;base64,UklGRiYAAABXQVZFZm10IBAAAAABAAEAQB8AAAB9AAACABAAZGF0YQIAAAAAAA==" type="audio/wav">
+    </audio>
+</body>
+</html>
